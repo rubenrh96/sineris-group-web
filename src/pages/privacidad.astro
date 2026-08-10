@@ -1,0 +1,63 @@
+---
+// Draft legal copy — have counsel review before launch (this should be
+// verified against the actual data processing carried out via the
+// contact form and any analytics/cookies added later).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { COMPANY } from '../data/nav';
+---
+
+<BaseLayout title="Política de privacidad" description="Política de privacidad de Sineris Group SLU.">
+  <header class="section section--tight">
+    <div class="wrap">
+      <SectionHeading level="h1">Política de privacidad</SectionHeading>
+    </div>
+  </header>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="prose">
+        <h2>1. Responsable del tratamiento</h2>
+        <p>
+          {COMPANY.name}, con domicilio en {COMPANY.addressLine}, es responsable del tratamiento
+          de los datos personales facilitados a través del formulario de contacto de este sitio
+          web. Puede contactar con nosotros en{' '}
+          <a href={`mailto:${COMPANY.email}`} class="link">{COMPANY.email}</a>.
+        </p>
+
+        <h2>2. Finalidad del tratamiento</h2>
+        <p>
+          Los datos facilitados a través del formulario de contacto se utilizan exclusivamente
+          para gestionar su solicitud de información, muestra técnica u oferta comercial, y para
+          mantener la relación comercial que, en su caso, se derive de ella.
+        </p>
+
+        <h2>3. Legitimación</h2>
+        <p>
+          La base legal para el tratamiento de sus datos es su consentimiento expreso, otorgado al
+          marcar la casilla de aceptación al enviar el formulario de contacto.
+        </p>
+
+        <h2>4. Conservación de los datos</h2>
+        <p>
+          Los datos se conservarán mientras exista un interés mutuo para mantener la relación
+          comercial y, posteriormente, durante los plazos legalmente exigibles.
+        </p>
+
+        <h2>5. Derechos</h2>
+        <p>
+          Puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación y
+          portabilidad enviando un correo a{' '}
+          <a href={`mailto:${COMPANY.email}`} class="link">{COMPANY.email}</a>, indicando el
+          derecho que desea ejercer y adjuntando copia de un documento que acredite su identidad.
+        </p>
+
+        <h2>6. Destinatarios</h2>
+        <p>
+          Sus datos no se cederán a terceros salvo obligación legal, ni se utilizarán para
+          decisiones automatizadas.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

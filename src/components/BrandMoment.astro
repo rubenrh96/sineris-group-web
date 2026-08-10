@@ -1,0 +1,30 @@
+---
+// A single, deliberate brand pause — the real logo artwork, shown once,
+// on the dark tone it was designed for. Not reused as a small UI mark
+// (navbar/favicon keep the flat "S" — the chrome render doesn't read at
+// small sizes and the site's own dark ink already matches its backdrop).
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/sineris-logo-mark.png';
+---
+
+<section class="section--tight section--ink brand-moment">
+  <div class="wrap brand-moment__inner" data-reveal>
+    <Image src={logo} alt="Sineris Group SLU" width={340} height={340} class="brand-moment__logo" />
+  </div>
+</section>
+
+<style>
+  .brand-moment {
+    padding-block: clamp(3rem, 7vw, 5rem);
+  }
+
+  .brand-moment__inner {
+    display: flex;
+    justify-content: center;
+  }
+
+  .brand-moment__logo {
+    width: clamp(9rem, 18vw, 13rem);
+    height: auto;
+  }
+</style>

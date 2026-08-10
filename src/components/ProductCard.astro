@@ -1,0 +1,123 @@
+---
+import { Image } from 'astro:assets';
+import ImagePlaceholder from './ImagePlaceholder.astro';
+import type { Product } from '../data/products';
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+---
+
+<article class="product-card" data-reveal>
+  {
+    product.image ? (
+      <Image
+        src={product.image}
+        alt={`${product.title}: ${product.description}`}
+        width={640}
+        height={427}
+        class="product-card__image product-card__image--photo"
+      />
+    ) : (
+      <ImagePlaceholder
+        caption={`Fotografía de producto: ${product.title.toLowerCase()}.`}
+        ratio="4 / 3"
+        tone="warm"
+        class="product-card__image"
+      />
+    )
+  }
+
+  <div class="product-card__body">
+    <div class="product-card__head">
+      <span class="product-card__n">{product.n}</span>
+      <span class="product-card__spec">{product.spec}</span>
+    </div>
+    <h3 class:list={{ 'visually-hidden': Boolean(product.image) }}>{product.title}</h3>
+    <p>{product.description}</p>
+    <a href={`/contacto?producto=${product.slug}`} class="product-card__link">
+      Solicitar ficha técnica
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M3.5 8h9M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </a>
+  </div>
+</article>
+
+<style>
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .product-card__image {
+    transition: transform 0.7s var(--ease);
+  }
+
+  .product-card:hover .product-card__image {
+    transform: scale(1.015);
+  }
+
+  .product-card__image--photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: var(--radius-m);
+    border: 1px solid var(--border);
+  }
+
+  .product-card__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .product-card__n {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--accent);
+    font-size: 1rem;
+  }
+
+  .product-card__spec {
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--muted-soft);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.25em 0.75em;
+    white-space: nowrap;
+  }
+
+  .product-card__body h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-card__body p {
+    font-size: 0.95rem;
+  }
+
+  .product-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    margin-top: 0.9rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .product-card__link svg {
+    transition: transform 0.35s var(--ease);
+  }
+
+  .product-card__link:hover svg {
+    transform: translateX(3px);
+  }
+</style>

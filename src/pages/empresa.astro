@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import MediaCopy from '../components/MediaCopy.astro';
+import Timeline from '../components/Timeline.astro';
+import Gallery from '../components/Gallery.astro';
+import BrandMoment from '../components/BrandMoment.astro';
+import CTA from '../components/CTA.astro';
+import campoCultivoImg from '../assets/products/campo-cultivo.png';
+---
+
+<BaseLayout
+  title="Empresa"
+  description="Sineris Group SLU: socio técnico de fabricantes de alimentos y bebidas, especializado en jarabes de alta concentración y soluciones edulcorantes."
+>
+  <header class="section section--tight">
+    <div class="wrap">
+      <SectionHeading eyebrow="Empresa" level="h1">
+        Un socio técnico, no un simple proveedor de materia prima.
+        <p slot="lede">
+          Sineris Group SLU desarrolla y produce jarabes de alta concentración y soluciones
+          edulcorantes de alto rendimiento para fabricantes de alimentos y bebidas.
+        </p>
+      </SectionHeading>
+    </div>
+  </header>
+
+  <MediaCopy
+    eyebrow="Origen"
+    title="De la caña, la remolacha y el maíz, a su formulación."
+    description="Trabajamos con azúcares de caña y remolacha, y con glucosas derivadas del maíz. Los transformamos en jarabes concentrados listos para dosificar, con la estabilidad y homogeneidad que la industria exige."
+    points={[
+      'Filtración avanzada y tratamientos térmicos con supervisión analítica propia.',
+      'Instalaciones con alta eficiencia energética.',
+      'Producto homogeneizado, listo para uso, sin cristalización.',
+      'Dosificación rápida y precisa que reduce mermas y almacenamiento.',
+    ]}
+    ctaLabel="Ver calidad y trazabilidad"
+    ctaHref="/calidad"
+    imageCaption="Fotografía aérea de campo de cultivo (caña, remolacha o maíz) al amanecer."
+    image={campoCultivoImg}
+  />
+
+  <Timeline />
+  <Gallery />
+  <BrandMoment />
+
+  <CTA
+    eyebrow="Trabajemos juntos"
+    title="¿Quiere conocer nuestra capacidad de producción?"
+    description="Programamos una visita técnica a la planta de Corella o una llamada con nuestro equipo de calidad."
+  />
+</BaseLayout>

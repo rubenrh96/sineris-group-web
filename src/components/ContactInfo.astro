@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import { COMPANY } from '../data/nav';
+import fabricaImg from '../assets/facility/fabrica.png';
+---
+
+<div class="contact-info" data-reveal>
+  <dl class="contact-info__list">
+    <div>
+      <dt>Sede y fábrica</dt>
+      <dd>
+        {COMPANY.name}<br />
+        {COMPANY.addressLine}
+      </dd>
+    </div>
+    <div>
+      <dt>Email</dt>
+      <dd><a href={`mailto:${COMPANY.email}`} class="link">{COMPANY.email}</a></dd>
+    </div>
+    <div>
+      <dt>Ventas</dt>
+      <dd><a href={`mailto:${COMPANY.salesEmail}`} class="link">{COMPANY.salesEmail}</a></dd>
+    </div>
+  </dl>
+
+  <div class="contact-info__hours">
+    <span class="contact-info__hours-label">Horario</span>
+    <p>{COMPANY.hours}</p>
+  </div>
+
+  <Image
+    src={fabricaImg}
+    alt="Interior de planta de producción."
+    width={640}
+    height={480}
+    class="contact-info__image"
+  />
+</div>
+
+<style>
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+  }
+
+  .contact-info__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .contact-info__list dt {
+    font-size: 0.78rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted-soft);
+    margin-bottom: 0.4rem;
+  }
+
+  .contact-info__list dd {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .contact-info__hours {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .contact-info__hours-label {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-info__hours p {
+    font-size: 0.95rem;
+  }
+
+  .contact-info__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-m);
+    border: 1px solid var(--border);
+  }
+</style>

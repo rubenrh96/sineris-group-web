@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import SectionHeading from './SectionHeading.astro';
+import fabricaImg from '../assets/facility/fabrica.png';
+import laboratorioImg from '../assets/facility/laboratorio.png';
+import recepcionImg from '../assets/facility/recepcion.png';
+import envasadoImg from '../assets/facility/linea-envasado.png';
+
+const photos = [
+  { image: fabricaImg, caption: 'Instalaciones de producción.', ratio: '21 / 9', wide: true, width: 1200, height: 514 },
+  { image: laboratorioImg, caption: 'Laboratorio de control analítico.', ratio: '1 / 1', width: 640, height: 640 },
+  { image: recepcionImg, caption: 'Recepción y almacenamiento de materia prima.', ratio: '1 / 1', width: 640, height: 640 },
+  { image: envasadoImg, caption: 'Línea de envasado y logística.', ratio: '1 / 1', width: 640, height: 640 },
+];
+---
+
+<section class="section gallery">
+  <div class="wrap">
+    <SectionHeading eyebrow="Instalaciones">
+      Producción y laboratorio.
+    </SectionHeading>
+
+    <div class="gallery__grid">
+      {
+        photos.map((photo) => (
+          <div class:list={['gallery__item', photo.wide && 'gallery__item--wide']} data-reveal>
+            <Image
+              src={photo.image}
+              alt={photo.caption}
+              width={photo.width}
+              height={photo.height}
+              style={`aspect-ratio: ${photo.ratio}`}
+              class="gallery__photo"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery__grid {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .gallery__item--wide {
+    grid-column: span 3;
+  }
+
+  .gallery__photo {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: var(--radius-m);
+    border: 1px solid var(--border);
+  }
+
+  @media (max-width: 760px) {
+    .gallery__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .gallery__item--wide {
+      grid-column: span 1;
+    }
+  }
+</style>

@@ -1,0 +1,85 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+const steps = [
+  {
+    n: '01',
+    title: 'Consulta técnica',
+    description: 'Nos cuenta su aplicación, concentración objetivo y volumen estimado.',
+  },
+  {
+    n: '02',
+    title: 'Formulación y muestra',
+    description: 'Preparamos ficha técnica y muestra de laboratorio en menos de 48 horas.',
+  },
+  {
+    n: '03',
+    title: 'Producción controlada',
+    description: 'Fabricamos bajo estándares de calidad y seguridad alimentaria, con trazabilidad por lote.',
+  },
+  {
+    n: '04',
+    title: 'Logística y entrega',
+    description: 'Coordinamos transporte y documentación técnica completa hasta su planta.',
+  },
+] as const;
+---
+
+<section class="section section--surface timeline">
+  <div class="wrap">
+    <SectionHeading eyebrow="Proceso de trabajo">
+      De la consulta a la entrega, en cuatro pasos.
+    </SectionHeading>
+
+    <ol class="timeline__steps">
+      {
+        steps.map((step) => (
+          <li class="timeline__step" data-reveal>
+            <span class="timeline__number">{step.n}</span>
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .timeline__steps {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .timeline__step {
+    position: relative;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--border-strong);
+  }
+
+  .timeline__number {
+    display: block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 0.9rem;
+  }
+
+  .timeline__step h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .timeline__step p {
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 760px) {
+    .timeline__steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

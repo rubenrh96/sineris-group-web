@@ -1,0 +1,167 @@
+---
+import { Image } from 'astro:assets';
+import Button from './Button.astro';
+import azucarLiquidoImg from '../assets/products/azucar-liquido.png';
+---
+
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <p class="hero__badge" data-reveal>
+        <span class="hero__dot" aria-hidden="true"></span>
+        Corella, Navarra · Proveedor B2B para la industria alimentaria
+      </p>
+
+      <h1 data-reveal>
+        Soluciones inteligentes en <em>azúcares líquidos.</em>
+      </h1>
+
+      <p class="hero__lede" data-reveal>
+        En Sineris Group SLU desarrollamos y producimos jarabes de alta concentración y
+        soluciones edulcorantes de alto rendimiento — a partir de azúcares de caña, remolacha y
+        glucosas derivadas del maíz — listas para incorporarse como materia prima en sus
+        procesos.
+      </p>
+
+      <div class="hero__actions" data-reveal>
+        <Button href="/productos">Ver catálogo</Button>
+        <Button href="/contacto" variant="secondary" arrow>Pedir muestra técnica</Button>
+      </div>
+    </div>
+
+    <div class="hero__media" data-reveal>
+      <Image
+        src={azucarLiquidoImg}
+        alt="Azúcares líquidos: soluciones concentradas de sacarosa de alta pureza, con caña de azúcar y un vaso de precipitados."
+        width={900}
+        height={600}
+        class="hero__image"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hero__card">
+        <span class="hero__card-label">Producto insignia</span>
+        <p class="hero__card-title">Azúcar Líquido 67 · 67% m.s.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block-start: clamp(3rem, 7vw, 5.5rem);
+    padding-block-end: clamp(3.5rem, 8vw, 7rem);
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.86fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .hero__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    max-width: 34rem;
+  }
+
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    align-self: flex-start;
+    font-size: 0.85rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.5em 1em;
+    background: var(--paper);
+  }
+
+  .hero__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .hero h1 {
+    max-width: 18ch;
+  }
+
+  .hero h1 em {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .hero__lede {
+    font-size: 1.0625rem;
+    max-width: 36rem;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  .hero__media {
+    position: relative;
+  }
+
+  .hero__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: var(--radius-m);
+    border: 1px solid var(--border);
+  }
+
+  .hero__card {
+    position: absolute;
+    left: clamp(-1rem, -3vw, 0rem);
+    bottom: clamp(-1.25rem, -3vw, -0.5rem);
+    background: var(--paper);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+    border-radius: var(--radius-m);
+    padding: 1.1rem 1.4rem;
+    max-width: 15rem;
+  }
+
+  .hero__card-label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-soft);
+    margin-bottom: 0.35rem;
+  }
+
+  .hero__card-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+
+  @media (max-width: 900px) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__media {
+      order: -1;
+    }
+
+    .hero__card {
+      position: static;
+      margin-top: 1rem;
+      max-width: none;
+    }
+  }
+</style>

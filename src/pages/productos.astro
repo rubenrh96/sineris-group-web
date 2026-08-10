@@ -1,0 +1,60 @@
+---
+import { getImage } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Products from '../components/Products.astro';
+import Sectors from '../components/Sectors.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import { PRODUCTS } from '../data/products';
+import { COMPANY } from '../data/nav';
+
+const productSchemas = await Promise.all(
+  PRODUCTS.map(async (product) => {
+    const image = product.image
+      ? await getImage({ src: product.image, width: 800, height: 600 })
+      : undefined;
+
+    return {
+      '@type': 'Product',
+      name: product.title,
+      description: product.description,
+      category: 'Ingredientes y edulcorantes para la industria alimentaria',
+      ...(image && { image: new URL(image.src, Astro.site).toString() }),
+      brand: { '@type': 'Brand', name: COMPANY.name },
+    };
+  })
+);
+
+const catalogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Catálogo de productos Sineris Group',
+  itemListElement: productSchemas.map((product, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    item: product,
+  })),
+};
+---
+
+<BaseLayout
+  title="Productos"
+  description="Ocho familias de jarabes, azúcares y edulcorantes: azúcar líquido, azúcar invertido, glucosa y fructosa, azúcar en grano, edulcorantes sólidos y formulaciones a medida."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(catalogSchema)} />
+  <div class="products-page__spacer" />
+  <Products level="h1" />
+  <Sectors />
+  <FAQ />
+  <CTA
+    eyebrow="¿No encuentra lo que busca?"
+    title="Desarrollamos formulaciones a medida."
+    description="Cuéntenos la aplicación, la concentración objetivo y el volumen: nuestro equipo técnico prepara una propuesta específica."
+  />
+</BaseLayout>
+
+<style>
+  .products-page__spacer {
+    padding-top: clamp(1.5rem, 4vw, 3rem);
+  }
+</style>

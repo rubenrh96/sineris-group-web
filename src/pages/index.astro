@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Values from '../components/Values.astro';
+import MediaCopy from '../components/MediaCopy.astro';
+import Timeline from '../components/Timeline.astro';
+import Products from '../components/Products.astro';
+import Sectors from '../components/Sectors.astro';
+import Certifications from '../components/Certifications.astro';
+import BrandMoment from '../components/BrandMoment.astro';
+import CTA from '../components/CTA.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ContactForm from '../components/ContactForm.astro';
+import campoCultivoImg from '../assets/products/campo-cultivo.png';
+---
+
+<BaseLayout
+  title="Soluciones inteligentes en azúcares líquidos"
+  description="Sineris Group SLU desarrolla y produce jarabes de alta concentración y soluciones edulcorantes para la industria alimentaria."
+>
+  <Hero />
+  <Values />
+  <BrandMoment />
+  <MediaCopy
+    eyebrow="Quiénes somos"
+    title="De la materia prima a la formulación, sin intermediarios."
+    description="Sineris Group SLU transforma azúcares de caña y remolacha, y glucosas derivadas del maíz, en jarabes concentrados y soluciones edulcorantes a medida. Trabajamos como socio técnico de fabricantes de alimentos y bebidas, no como un simple proveedor de materia prima."
+    points={[
+      'Azúcares de caña y remolacha, y glucosas derivadas del maíz como materia prima base.',
+      'Filtración avanzada y tratamientos térmicos con supervisión analítica propia.',
+      'Producto homogeneizado y listo para dosificar, sin cristalización.',
+      'Instalaciones de producción en Corella (Navarra) con alta eficiencia energética.',
+    ]}
+    ctaLabel="Conocer la empresa"
+    ctaHref="/empresa"
+    imageCaption="Fotografía aérea de campo de cultivo (caña, remolacha o maíz) al amanecer."
+    image={campoCultivoImg}
+  />
+  <Products limit={3} />
+  <Sectors />
+  <Timeline />
+  <Certifications />
+  <CTA />
+
+  <section class="section home-contact">
+    <div class="wrap home-contact__inner">
+      <SectionHeading eyebrow="Contacto" align="center">
+        Hablemos de su próximo lote.
+        <p slot="lede">
+          Escríbanos con su aplicación y volumen estimado. Le respondemos con ficha técnica y
+          oferta en menos de 48 horas laborables.
+        </p>
+      </SectionHeading>
+
+      <div class="home-contact__form">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .home-contact__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .home-contact__form {
+    width: 100%;
+    max-width: 42rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+// Native <details>/<summary> accordion — accessible and works with zero JS.
+import SectionHeading from './SectionHeading.astro';
+
+const faqs = [
+  {
+    q: '¿Cuánto tardan en enviar una muestra técnica?',
+    a: 'Respondemos con ficha técnica, muestra de laboratorio y oferta en menos de 48 horas laborables desde que recibimos su solicitud.',
+  },
+  {
+    q: '¿Cuál es el pedido mínimo?',
+    a: 'Depende del producto y del formato de envasado. Cuéntenos su aplicación y volumen estimado a través del formulario de contacto y le confirmamos condiciones concretas.',
+  },
+  {
+    q: '¿En qué formatos se sirve el producto?',
+    a: 'Trabajamos con distintos formatos de transporte a granel para jarabes y azúcares líquidos, además de formatos sólidos ensacados. La disponibilidad exacta depende de cada familia de producto — consúltenos para su caso.',
+  },
+  {
+    q: '¿Qué documentación acompaña a cada envío?',
+    a: 'Cada lote incluye ficha técnica, hoja de seguridad y certificado de análisis, revisados por nuestro laboratorio antes de salir de fábrica.',
+  },
+  {
+    q: '¿Tienen certificaciones de calidad alimentaria?',
+    a: 'Producimos bajo control analítico propio y verificación externa independiente. Si su proceso requiere una certificación específica, consúltenos su disponibilidad para el producto que necesita.',
+  },
+  {
+    q: '¿A qué zonas geográficas sirven?',
+    a: 'Nuestra planta está en Corella, Navarra. Cuéntenos su ubicación en el formulario de contacto y le confirmamos plazos y condiciones de envío.',
+  },
+  {
+    q: '¿Puedo pedir una ficha técnica sin comprometerme a nada?',
+    a: 'Sí. Puede solicitar ficha técnica y muestra sin compromiso desde el formulario de contacto, indicando el producto que le interesa.',
+  },
+] as const;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+};
+---
+
+<section class="section section--surface faq">
+  <div class="wrap faq__grid">
+    <SectionHeading eyebrow="Preguntas frecuentes" class="faq__heading">
+      Antes de escribirnos.
+      <p slot="lede">
+        Lo que más nos preguntan los fabricantes antes de solicitar una muestra técnica.
+      </p>
+    </SectionHeading>
+
+    <div class="faq__list" data-reveal>
+      {
+        faqs.map((item) => (
+          <details class="faq__item">
+            <summary>
+              <span>{item.q}</span>
+              <svg class="faq__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6.5 8 10.5 12 6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </summary>
+            <p>{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
+</section>
+
+<style>
+  .faq__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .faq__heading {
+    position: sticky;
+    top: 6.5rem;
+  }
+
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--border);
+    padding-block: 1.4rem;
+  }
+
+  .faq__item:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 560;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__chevron {
+    flex-shrink: 0;
+    color: var(--muted-soft);
+    transition: transform 0.3s var(--ease);
+  }
+
+  .faq__item[open] .faq__chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq__item p {
+    margin-top: 0.9rem;
+    font-size: 0.98rem;
+    max-width: 38rem;
+  }
+
+  @media (max-width: 860px) {
+    .faq__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .faq__heading {
+      position: static;
+    }
+  }
+</style>

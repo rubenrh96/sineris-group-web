@@ -1,0 +1,99 @@
+---
+import { Image } from 'astro:assets';
+import Eyebrow from './Eyebrow.astro';
+import Button from './Button.astro';
+import fabricaImg from '../assets/facility/fabrica.png';
+
+interface Props {
+  level?: 'h1' | 'h2';
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const { level = 'h2', ctaLabel = 'Calidad y trazabilidad', ctaHref = '/calidad' } = Astro.props;
+const Heading = level;
+
+const documents = ['Ficha técnica', 'Hoja de seguridad', 'Certificado de análisis'];
+---
+
+<section class="section section--ink certifications">
+  <div class="wrap certifications__grid">
+    <div class="certifications__copy" data-reveal>
+      <Eyebrow>Producción</Eyebrow>
+      <Heading>Un socio estratégico para fabricantes de alimentos y bebidas.</Heading>
+      <p>
+        Producimos bajo estrictos estándares de calidad y seguridad alimentaria. Cada lote se
+        acompaña de la documentación técnica completa, revisada por nuestro laboratorio antes de
+        salir de fábrica.
+      </p>
+
+      <ul class="certifications__docs">
+        {documents.map((doc) => <li>{doc}</li>)}
+      </ul>
+
+      <Button href={ctaHref} variant="onInk" arrow>{ctaLabel}</Button>
+    </div>
+
+    <Image
+      src={fabricaImg}
+      alt="Interior de planta de producción con tanques de acero inoxidable."
+      width={640}
+      height={480}
+      class="certifications__image"
+    />
+  </div>
+</section>
+
+<style>
+  .certifications__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.86fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .certifications__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    max-width: 32rem;
+  }
+
+  .certifications__copy p {
+    font-size: 1.0625rem;
+  }
+
+  .certifications__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-m);
+    border: 1px solid var(--border-inverse);
+  }
+
+  .certifications__docs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-block: 0.3rem 0.6rem;
+  }
+
+  .certifications__docs li {
+    font-size: 0.85rem;
+    border: 1px solid var(--border-inverse);
+    border-radius: 999px;
+    padding: 0.4em 0.9em;
+    color: var(--ink-inverse);
+  }
+
+  @media (max-width: 900px) {
+    .certifications__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .certifications__image {
+      order: -1;
+    }
+  }
+</style>

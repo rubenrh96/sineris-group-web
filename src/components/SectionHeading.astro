@@ -1,0 +1,40 @@
+---
+interface Props {
+  eyebrow?: string;
+  align?: 'left' | 'center';
+  level?: 'h1' | 'h2';
+  class?: string;
+}
+
+import Eyebrow from './Eyebrow.astro';
+
+const { eyebrow, align = 'left', level = 'h2', class: className = '' } = Astro.props;
+const Heading = level;
+---
+
+<div class:list={['heading', `heading--${align}`, className]} data-reveal>
+  {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+  <Heading><slot /></Heading>
+  <slot name="lede" />
+</div>
+
+<style>
+  .heading {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    max-width: 42rem;
+  }
+
+  .heading--center {
+    max-width: 38rem;
+    margin-inline: auto;
+    text-align: center;
+    align-items: center;
+  }
+
+  .heading :global(p) {
+    font-size: 1.0625rem;
+    max-width: 34rem;
+  }
+</style>

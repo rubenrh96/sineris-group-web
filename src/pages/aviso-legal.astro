@@ -1,0 +1,58 @@
+---
+// Draft legal copy — have counsel review before launch (identification
+// data, applicable law and dispute jurisdiction in particular).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { COMPANY } from '../data/nav';
+---
+
+<BaseLayout title="Aviso legal" description="Aviso legal de Sineris Group SLU.">
+  <header class="section section--tight">
+    <div class="wrap">
+      <SectionHeading level="h1">Aviso legal</SectionHeading>
+    </div>
+  </header>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="prose">
+        <h2>1. Datos identificativos</h2>
+        <p>
+          En cumplimiento del deber de información recogido en la legislación vigente, se
+          facilitan los siguientes datos: la presente web es propiedad de {COMPANY.name}, con
+          domicilio en {COMPANY.addressLine}. Puede contactar con nosotros a través de{' '}
+          <a href={`mailto:${COMPANY.email}`} class="link">{COMPANY.email}</a>.
+        </p>
+
+        <h2>2. Objeto</h2>
+        <p>
+          Este sitio web tiene como finalidad informar sobre la actividad, productos y servicios
+          de {COMPANY.name}, así como facilitar un canal de contacto con fabricantes y
+          distribuidores del sector alimentario.
+        </p>
+
+        <h2>3. Propiedad intelectual e industrial</h2>
+        <p>
+          Los contenidos de este sitio web (textos, imágenes, marcas y logotipos) son propiedad de
+          {COMPANY.name} o de terceros que han autorizado su uso, y están protegidos por la
+          normativa de propiedad intelectual e industrial. Queda prohibida su reproducción total o
+          parcial sin autorización expresa.
+        </p>
+
+        <h2>4. Condiciones de uso</h2>
+        <p>
+          El acceso a este sitio web es gratuito y no requiere registro previo. El usuario se
+          compromete a hacer un uso adecuado de los contenidos y a no emplearlos para fines
+          ilícitos o lesivos para terceros.
+        </p>
+
+        <h2>5. Legislación aplicable</h2>
+        <p>
+          Las presentes condiciones se rigen por la legislación española. Para cualquier
+          controversia derivada del acceso o uso de este sitio web, las partes se someten a los
+          juzgados y tribunales que correspondan conforme a derecho.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Certifications from '../components/Certifications.astro';
+import MediaCopy from '../components/MediaCopy.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CTA from '../components/CTA.astro';
+import profesionalLaboratorioImg from '../assets/facility/profesional-laboratorio.png';
+
+const documents = [
+  {
+    title: 'Ficha técnica',
+    description: 'Especificaciones fisicoquímicas, condiciones de almacenamiento y vida útil de cada producto.',
+  },
+  {
+    title: 'Hoja de seguridad',
+    description: 'Información de manipulación, transporte y seguridad conforme a la normativa vigente.',
+  },
+  {
+    title: 'Certificado de análisis',
+    description: 'Resultados analíticos del lote concreto suministrado, emitidos por nuestro laboratorio.',
+  },
+];
+---
+
+<BaseLayout
+  title="Calidad"
+  description="Laboratorio propio, control externo independiente y documentación técnica completa por lote en Sineris Group SLU."
+>
+  <Certifications level="h1" ctaLabel="Solicitar auditoría de calidad" ctaHref="/contacto" />
+
+  <MediaCopy
+    eyebrow="Laboratorio"
+    title="Control analítico propio, con verificación externa."
+    description="Cada lote se analiza en nuestro laboratorio antes de salir de fábrica. De forma periódica, un laboratorio externo independiente verifica nuestros resultados, reforzando la fiabilidad de cada entrega."
+    points={[
+      'Analítica interna en cada lote de producción.',
+      'Verificación externa independiente de forma periódica.',
+      'Parámetros fisicoquímicos y microbiológicos según producto.',
+      'Registro y archivo histórico de resultados por lote.',
+    ]}
+    ctaLabel="Ver catálogo de productos"
+    ctaHref="/productos"
+    imageCaption="Analista de laboratorio realizando un control de muestra."
+    imageTone="neutral"
+    imageSide="right"
+    image={profesionalLaboratorioImg}
+  />
+
+  <section class="section section--surface documents">
+    <div class="wrap">
+      <SectionHeading eyebrow="Documentación" align="center">
+        Trazabilidad completa, lote a lote.
+        <p slot="lede">
+          Cada envío incluye la documentación técnica necesaria para su control de calidad
+          interno.
+        </p>
+      </SectionHeading>
+
+      <ul class="documents__grid">
+        {
+          documents.map((doc) => (
+            <li class="documents__item" data-reveal>
+              <h3>{doc.title}</h3>
+              <p>{doc.description}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CTA
+    eyebrow="¿Necesita más información?"
+    title="Solicite nuestra documentación de calidad."
+    description="Le enviamos fichas técnicas, hojas de seguridad y certificados de análisis de referencia para su evaluación."
+  />
+</BaseLayout>
+
+<style>
+  .documents__grid {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .documents__item {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    padding: 1.75rem;
+  }
+
+  .documents__item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .documents__item p {
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 760px) {
+    .documents__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+---
+
+<BaseLayout title="Página no encontrada" description="La página que busca no existe o se ha movido.">
+  <section class="section not-found">
+    <div class="wrap not-found__inner">
+      <span class="eyebrow">Error 404</span>
+      <h1>Esta página no existe.</h1>
+      <p>Puede que el enlace esté roto o que la página se haya movido de sitio.</p>
+      <div class="not-found__actions">
+        <Button href="/">Volver al inicio</Button>
+        <Button href="/contacto" variant="secondary" arrow>Contactar</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding-block: clamp(6rem, 14vw, 10rem);
+  }
+
+  .not-found__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.1rem;
+    max-width: 32rem;
+    margin-inline: auto;
+  }
+
+  .not-found__actions {
+    display: flex;
+    gap: 0.9rem;
+    margin-top: 0.75rem;
+  }
+</style>

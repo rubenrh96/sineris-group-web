@@ -1,0 +1,173 @@
+---
+import { Image } from 'astro:assets';
+import { COMPANY, NAV_LINKS } from '../data/nav';
+import icon from '../assets/brand/sineris-icon-mark.png';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="wrap footer__top">
+    <div class="footer__brand">
+      <a href="/" class="footer__logo" aria-label="Sineris Group — Inicio">
+        <span class="footer__mark">
+          <Image src={icon} alt="" width={64} height={64} />
+        </span>
+        <span class="footer__name">Sineris<span class="footer__name-suffix">.group</span></span>
+      </a>
+      <p>Ingredientes especiales y soluciones edulcorantes de alta pureza para fabricantes, distribuidores y la industria alimentaria.</p>
+    </div>
+
+    <nav class="footer__col" aria-label="Navegación">
+      <p class="footer__col-title">Navegación</p>
+      <ul>
+        {NAV_LINKS.filter((l) => l.href !== '/').map((link) => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="footer__col">
+      <p class="footer__col-title">Contacto</p>
+      <ul>
+        <li>{COMPANY.name}</li>
+        <li>{COMPANY.addressLine}</li>
+        <li><a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap footer__bottom">
+    <p>&copy; {year} {COMPANY.name}. Todos los derechos reservados.</p>
+    <ul class="footer__legal">
+      <li><a href="/aviso-legal">Aviso legal</a></li>
+      <li><a href="/privacidad">Política de privacidad</a></li>
+      <li><a href="/cookies">Cookies</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+
+  .footer__top {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    padding-block: clamp(3.5rem, 7vw, 5.5rem);
+  }
+
+  .footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 26rem;
+  }
+
+  .footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .footer__mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.35rem;
+    height: 2.35rem;
+    border-radius: 7px;
+    background: var(--ink);
+    flex-shrink: 0;
+  }
+
+  .footer__mark :global(img) {
+    width: 68%;
+    height: 68%;
+    object-fit: contain;
+  }
+
+  .footer__name {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+  }
+
+  .footer__name-suffix {
+    color: var(--muted-soft);
+    font-style: italic;
+  }
+
+  .footer__brand p {
+    font-size: 0.95rem;
+  }
+
+  .footer__col-title {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-soft);
+    margin-bottom: 1.1rem;
+  }
+
+  .footer__col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .footer__col a {
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.25s var(--ease);
+  }
+
+  .footer__col a:hover {
+    color: var(--ink);
+  }
+
+  .footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--muted-soft);
+  }
+
+  .footer__legal {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer__legal a {
+    text-decoration: none;
+    color: var(--muted-soft);
+  }
+
+  .footer__legal a:hover {
+    color: var(--ink);
+  }
+
+  @media (max-width: 760px) {
+    .footer__top {
+      grid-template-columns: 1fr;
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

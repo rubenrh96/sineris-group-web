@@ -1,0 +1,115 @@
+---
+// Stand-in for real photography. Keeps correct proportions/treatment so the
+// layout is production-ready; swap for a licensed photo before launch.
+interface Props {
+  caption: string;
+  ratio?: string;
+  tone?: 'neutral' | 'warm' | 'cool' | 'earth';
+  class?: string;
+}
+
+const { caption, ratio = '4 / 5', tone = 'neutral', class: className = '' } = Astro.props;
+---
+
+<figure class:list={['placeholder', `is-${tone}`, className]} style={`aspect-ratio: ${ratio}`}>
+  <svg
+    class="placeholder__icon"
+    width="28"
+    height="28"
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+  >
+    <rect x="2.5" y="5.5" width="19" height="14" rx="2" stroke="currentColor" stroke-width="1.3" />
+    <circle cx="8.5" cy="10.5" r="1.6" stroke="currentColor" stroke-width="1.3" />
+    <path
+      d="M4 17.5 8.7 13a1.5 1.5 0 0 1 2.1 0l1.2 1.2M14.5 15l1.6-1.6a1.5 1.5 0 0 1 2.1 0l2.3 2.3"
+      stroke="currentColor"
+      stroke-width="1.3"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+  <figcaption>{caption}</figcaption>
+</figure>
+
+<style>
+  .placeholder {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius-m);
+    border: 1px solid var(--border);
+    background:
+      repeating-linear-gradient(
+        135deg,
+        rgba(20, 24, 28, 0.035) 0px,
+        rgba(20, 24, 28, 0.035) 1px,
+        transparent 1px,
+        transparent 12px
+      ),
+      var(--surface);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    text-align: center;
+    padding: 1.5rem;
+    overflow: hidden;
+    color: var(--muted-soft);
+  }
+
+  .placeholder__icon {
+    color: var(--muted-soft);
+  }
+
+  .placeholder figcaption {
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    max-width: 22rem;
+    color: var(--muted-soft);
+  }
+
+  .placeholder.is-warm {
+    background:
+      repeating-linear-gradient(
+        135deg,
+        rgba(43, 76, 158, 0.04) 0px,
+        rgba(43, 76, 158, 0.04) 1px,
+        transparent 1px,
+        transparent 12px
+      ),
+      #f7f2ea;
+  }
+
+  .placeholder.is-cool {
+    background:
+      repeating-linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.03) 0px,
+        rgba(255, 255, 255, 0.03) 1px,
+        transparent 1px,
+        transparent 12px
+      ),
+      #10161f;
+    color: var(--muted-inverse);
+    border-color: var(--border-inverse);
+  }
+
+  .placeholder.is-cool .placeholder__icon,
+  .placeholder.is-cool figcaption {
+    color: var(--muted-inverse);
+  }
+
+  .placeholder.is-earth {
+    background:
+      repeating-linear-gradient(
+        135deg,
+        rgba(120, 90, 40, 0.05) 0px,
+        rgba(120, 90, 40, 0.05) 1px,
+        transparent 1px,
+        transparent 12px
+      ),
+      #f2ede3;
+  }
+</style>

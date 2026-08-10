@@ -1,0 +1,91 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { COMPANY } from '../data/nav';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image = '/og-image.jpg' } = Astro.props;
+
+// Cookieless, GDPR-friendly analytics — only loads once a Plausible site
+// domain is configured (see .env.example). No tracking ships until then.
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(image, Astro.site);
+const siteTitle = `${title} · ${COMPANY.name}`;
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: COMPANY.name,
+  url: Astro.site?.toString(),
+  email: COMPANY.email,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Corella',
+    addressRegion: 'Navarra',
+    addressCountry: 'ES',
+  },
+  industry: 'Fabricación de ingredientes y edulcorantes para la industria alimentaria',
+};
+---
+
+<!doctype html>
+<html lang={Astro.currentLocale ?? 'es'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{siteTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#14181c" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={COMPANY.name} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={siteTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+
+    {
+      plausibleDomain && (
+        <script is:inline defer data-domain={plausibleDomain} src="https://plausible.io/js/script.js" />
+      )
+    }
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+    <Navbar />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script src="../scripts/reveal.js"></script>
+  </body>
+</html>

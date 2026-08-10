@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ContactInfo from '../components/ContactInfo.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<BaseLayout
+  title="Contacto"
+  description="Solicite una ficha técnica, una muestra de laboratorio o una oferta a medida. Respondemos en menos de 48 horas laborables."
+>
+  <section class="section contact-page">
+    <div class="wrap contact-page__grid">
+      <div class="contact-page__intro">
+        <SectionHeading eyebrow="Contacto" level="h1">
+          Cuéntanos qué necesitas.
+          <p slot="lede">
+            Muestra técnica, oferta o proyecto a medida: respondemos en menos de 48 horas
+            laborables.
+          </p>
+        </SectionHeading>
+
+        <ContactInfo />
+      </div>
+
+      <ContactForm />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-page__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .contact-page__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .contact-page__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

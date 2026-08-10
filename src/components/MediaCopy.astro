@@ -1,0 +1,138 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import Eyebrow from './Eyebrow.astro';
+import Button from './Button.astro';
+import ImagePlaceholder from './ImagePlaceholder.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  points?: string[];
+  ctaLabel: string;
+  ctaHref: string;
+  imageCaption: string;
+  imageTone?: 'neutral' | 'warm' | 'cool' | 'earth';
+  imageSide?: 'left' | 'right';
+  image?: ImageMetadata;
+}
+
+const {
+  eyebrow,
+  title,
+  description,
+  points = [],
+  ctaLabel,
+  ctaHref,
+  imageCaption,
+  imageTone = 'earth',
+  imageSide = 'left',
+  image,
+} = Astro.props;
+---
+
+<section class="section media-copy" data-side={imageSide}>
+  <div class="wrap media-copy__grid">
+    {
+      image ? (
+        <Image
+          src={image}
+          alt={imageCaption}
+          width={640}
+          height={480}
+          class="media-copy__image media-copy__image--photo"
+        />
+      ) : (
+        <ImagePlaceholder caption={imageCaption} ratio="4 / 3" tone={imageTone} class="media-copy__image" />
+      )
+    }
+
+    <div class="media-copy__copy" data-reveal>
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h2>{title}</h2>
+      <p>{description}</p>
+
+      {
+        points.length > 0 && (
+          <ul class="media-copy__points">
+            {points.map((point) => (
+              <li>
+                <span class="media-copy__marker" aria-hidden="true" />
+                {point}
+              </li>
+            ))}
+          </ul>
+        )
+      }
+
+      <Button href={ctaHref} variant="secondary" arrow>{ctaLabel}</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .media-copy__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .media-copy[data-side='right'] .media-copy__image {
+    order: 2;
+  }
+
+  .media-copy__image--photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-m);
+    border: 1px solid var(--border);
+  }
+
+  .media-copy__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    max-width: 34rem;
+  }
+
+  .media-copy__copy p {
+    font-size: 1.0625rem;
+  }
+
+  .media-copy__points {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-block: 0.4rem 0.6rem;
+  }
+
+  .media-copy__points li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.98rem;
+    color: var(--muted);
+  }
+
+  .media-copy__marker {
+    flex-shrink: 0;
+    width: 14px;
+    height: 2px;
+    margin-top: 0.65em;
+    background: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .media-copy__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .media-copy[data-side='right'] .media-copy__image {
+      order: -1;
+    }
+  }
+</style>
