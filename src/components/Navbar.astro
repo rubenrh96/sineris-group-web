@@ -14,7 +14,7 @@ const isActive = (href: string) => (href === '/' ? currentPath === '/' : current
       <span class="navbar__mark">
         <Image src={icon} alt="" width={64} height={64} />
       </span>
-      <span class="navbar__name">Sineris<span class="navbar__name-suffix">.group</span></span>
+      <span class="navbar__name">Sineris Group</span>
     </a>
 
     <nav class="navbar__nav" aria-label="Navegación principal">
@@ -121,11 +121,6 @@ const isActive = (href: string) => (href === '/' ? currentPath === '/' : current
     font-family: var(--font-display);
     font-size: 1.2rem;
     letter-spacing: -0.01em;
-  }
-
-  .navbar__name-suffix {
-    color: var(--muted-soft);
-    font-style: italic;
   }
 
   .navbar__nav ul {

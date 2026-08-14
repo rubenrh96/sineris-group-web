@@ -10,7 +10,7 @@ export const COMPANY = {
   name: 'Sineris Group SLU',
   shortName: 'Sineris',
   domain: 'sinerisgroup.com',
-  email: 'info@sinerisgroup.com',
+  email: 'c.delgado@sinerisgroup.com',
   salesEmail: 'ventas@sinerisgroup.com',
   addressLine: 'Corella, Navarra, España',
   hours: 'L–V · 9:00 a 18:00 CET',
