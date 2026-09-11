@@ -194,7 +194,7 @@ const isActive = (href: string) => (href === '/' ? currentPath === '/' : current
       gap: 0.25rem;
     }
 
-    .mobile-nav a {
+    .mobile-nav a:not(.mobile-nav__cta) {
       display: block;
       padding: 0.75rem 0;
       text-decoration: none;
@@ -205,9 +205,9 @@ const isActive = (href: string) => (href === '/' ? currentPath === '/' : current
 
     .mobile-nav__cta {
       margin-top: 0.75rem;
+      width: 100%;
       text-align: center;
       justify-content: center;
-      border-bottom: none !important;
     }
   }
 </style>
