@@ -29,6 +29,8 @@ export interface Product {
   image?: ImageMetadata;
   /** True when the image already has the product title baked into it (like the sugar family banners) — the card hides its own <h3> to avoid a duplicate. */
   titleInImage?: boolean;
+  /** CSS object-position for the card photo, for images whose subject isn't centered (e.g. a tall bottle) and gets clipped by the default centered 3:2 crop. */
+  imagePosition?: string;
 }
 
 export interface ProductCategory {
@@ -205,6 +207,7 @@ export const PRODUCTS: Product[] = [
     description: 'Aceite de pepita de uva, ligero y de sabor neutro.',
     category: 'aceites',
     image: aceitePepitaUvaImg,
+    imagePosition: 'top',
   },
 
   // Otros ingredientes
