@@ -15,6 +15,7 @@ import aceiteCocoImg from '../assets/products/aceite-coco.png';
 import aceiteAguacateImg from '../assets/products/aceite-aguacate.png';
 import aceitePepitaUvaImg from '../assets/products/aceite-pepita-uva.png';
 import almidonImg from '../assets/products/almidon.png';
+import acidoCitricoImg from '../assets/products/acido-citrico.png';
 
 export type CategoryId = 'azucares' | 'aceites' | 'otros';
 
@@ -223,5 +224,6 @@ export const PRODUCTS: Product[] = [
     spec: 'Grado alimentario',
     description: 'Regulador de acidez y conservante natural de uso alimentario, en formato sólido.',
     category: 'otros',
+    image: acidoCitricoImg,
   },
 ];
