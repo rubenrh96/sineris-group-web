@@ -1,29 +1,52 @@
 ---
 import SectionHeading from './SectionHeading.astro';
 import ProductCard from './ProductCard.astro';
-import { PRODUCTS } from '../data/products';
+import { PRODUCTS, PRODUCT_CATEGORIES, type CategoryId } from '../data/products';
 
 interface Props {
+  category?: CategoryId;
   limit?: number;
   surface?: boolean;
   level?: 'h1' | 'h2';
+  featuredSlugs?: string[];
 }
 
-const { limit, surface = false, level = 'h2' } = Astro.props;
-const items = limit ? PRODUCTS.slice(0, limit) : PRODUCTS;
-const isPreview = Boolean(limit && limit < PRODUCTS.length);
+const { category, limit, surface = false, level = 'h2', featuredSlugs } = Astro.props;
+
+let items: typeof PRODUCTS;
+let isPreview: boolean;
+let meta: { eyebrow: string; title: string; lede: string };
+
+if (featuredSlugs) {
+  items = featuredSlugs
+    .map((slug) => PRODUCTS.find((product) => product.slug === slug))
+    .filter((product): product is (typeof PRODUCTS)[number] => Boolean(product));
+  isPreview = true;
+  meta = {
+    eyebrow: 'Catálogo',
+    title: 'Azúcares, aceites y más.',
+    lede: 'Azúcares y jarabes, aceites vegetales y otros ingredientes, fabricados bajo el mismo control analítico y la misma documentación técnica.',
+  };
+} else {
+  const scoped = category ? PRODUCTS.filter((product) => product.category === category) : PRODUCTS;
+  items = limit ? scoped.slice(0, limit) : scoped;
+  isPreview = Boolean(limit && limit < scoped.length);
+  meta = category
+    ? PRODUCT_CATEGORIES.find((c) => c.id === category)!
+    : {
+        eyebrow: 'Catálogo',
+        title: 'Ingredientes para su producción.',
+        lede: 'Azúcares y jarabes, aceites vegetales y otros ingredientes, fabricados bajo el mismo control analítico y la misma documentación técnica.',
+      };
+}
 ---
 
 <section class:list={['section', 'products', surface && 'section--surface']}>
   <div class="wrap">
     <div class="products__head">
-      <SectionHeading eyebrow="Catálogo" level={level}>
-        Ocho familias, una misma exigencia técnica.
-        <p slot="lede">
-          De los jarabes concentrados de sacarosa al azúcar en grano y los edulcorantes sólidos:
-          cada familia se fabrica bajo el mismo control analítico y la misma documentación
-          técnica.
-        </p>
+      <SectionHeading eyebrow={meta.eyebrow} level={level}>
+        {meta.title}
+        <p slot="lede">{meta.lede}</p>
       </SectionHeading>
 
       {

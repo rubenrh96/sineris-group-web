@@ -5,7 +5,7 @@ import Products from '../components/Products.astro';
 import Sectors from '../components/Sectors.astro';
 import FAQ from '../components/FAQ.astro';
 import CTA from '../components/CTA.astro';
-import { PRODUCTS } from '../data/products';
+import { PRODUCTS, PRODUCT_CATEGORIES } from '../data/products';
 import { COMPANY } from '../data/nav';
 
 const productSchemas = await Promise.all(
@@ -13,12 +13,13 @@ const productSchemas = await Promise.all(
     const image = product.image
       ? await getImage({ src: product.image, width: 800, height: 600 })
       : undefined;
+    const category = PRODUCT_CATEGORIES.find((c) => c.id === product.category);
 
     return {
       '@type': 'Product',
       name: product.title,
       description: product.description,
-      category: 'Ingredientes y edulcorantes para la industria alimentaria',
+      category: category?.eyebrow ?? 'Ingredientes para la industria alimentaria',
       ...(image && { image: new URL(image.src, Astro.site).toString() }),
       brand: { '@type': 'Brand', name: COMPANY.name },
     };
@@ -39,11 +40,21 @@ const catalogSchema = {
 
 <BaseLayout
   title="Productos"
-  description="Ocho familias de jarabes, azúcares y edulcorantes: azúcar líquido, azúcar invertido, glucosa y fructosa, azúcar en grano, edulcorantes sólidos y formulaciones a medida."
+  description="Azúcares y jarabes, aceites vegetales, almidones y ácido cítrico para la industria alimentaria: catálogo completo de Sineris Group."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(catalogSchema)} />
   <div class="products-page__spacer" />
-  <Products level="h1" />
+
+  {
+    PRODUCT_CATEGORIES.map((cat, index) => (
+      <Products
+        category={cat.id}
+        level={index === 0 ? 'h1' : 'h2'}
+        surface={index % 2 === 1}
+      />
+    ))
+  }
+
   <Sectors />
   <FAQ />
   <CTA

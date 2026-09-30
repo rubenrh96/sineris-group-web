@@ -2,7 +2,7 @@
 // NOTE: no backend is wired up yet. This posts to /api/contact, which
 // doesn't exist — connect a real endpoint (serverless function, Formspree,
 // Netlify Forms, etc.) before launch.
-import { PRODUCTS } from '../data/products';
+import { PRODUCTS, PRODUCT_CATEGORIES } from '../data/products';
 import { COMPANY } from '../data/nav';
 ---
 
@@ -33,7 +33,15 @@ import { COMPANY } from '../data/nav';
     <label for="product">Producto de interés</label>
     <select id="product" name="product">
       <option value="">Consulta general</option>
-      {PRODUCTS.map((product) => <option value={product.slug}>{product.title}</option>)}
+      {
+        PRODUCT_CATEGORIES.map((cat) => (
+          <optgroup label={cat.eyebrow}>
+            {PRODUCTS.filter((product) => product.category === cat.id).map((product) => (
+              <option value={product.slug}>{product.title}</option>
+            ))}
+          </optgroup>
+        ))
+      }
     </select>
   </div>
 
