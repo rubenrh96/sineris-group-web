@@ -7,6 +7,8 @@ import edulcorantesSolidosImg from '../assets/products/edulcorantes-solidos.png'
 import azucarLiquidoOsmotizadoImg from '../assets/products/azucar-liquido-osmotizado.png';
 import maltodextrinasImg from '../assets/products/maltodextrinas.png';
 import formulacionesAMedidaImg from '../assets/products/formulaciones-a-medida.png';
+import aceiteOlivaImg from '../assets/products/aceite-oliva.png';
+import aceiteGirasolImg from '../assets/products/aceite-girasol.png';
 
 export type CategoryId = 'azucares' | 'aceites' | 'otros';
 
@@ -18,6 +20,8 @@ export interface Product {
   description: string;
   category: CategoryId;
   image?: ImageMetadata;
+  /** True when the image already has the product title baked into it (like the sugar family banners) — the card hides its own <h3> to avoid a duplicate. */
+  titleInImage?: boolean;
 }
 
 export interface ProductCategory {
@@ -58,6 +62,7 @@ export const PRODUCTS: Product[] = [
     description: 'Jarabe concentrado de sacarosa. Versión estándar y decolorada, lista para dosificar.',
     category: 'azucares',
     image: azucarLiquidoImg,
+    titleInImage: true,
   },
   {
     n: '02',
@@ -67,6 +72,7 @@ export const PRODUCTS: Product[] = [
     description: 'Azúcar líquido osmotizado y decolorado para bebidas espirituosas y aplicaciones de alta exigencia visual.',
     category: 'azucares',
     image: azucarLiquidoOsmotizadoImg,
+    titleInImage: true,
   },
   {
     n: '03',
@@ -76,6 +82,7 @@ export const PRODUCTS: Product[] = [
     description: 'Jarabes ORO, DECO e invertido parcial — proceso enzimático o ácido, según aplicación.',
     category: 'azucares',
     image: azucarInvertidoImg,
+    titleInImage: true,
   },
   {
     n: '04',
@@ -85,6 +92,7 @@ export const PRODUCTS: Product[] = [
     description: 'Jarabes de glucosa y mezclas glucosa-fructosa derivados de maíz, para bollería, bebidas y conservas.',
     category: 'azucares',
     image: glucosaFructosaImg,
+    titleInImage: true,
   },
   {
     n: '05',
@@ -94,6 +102,7 @@ export const PRODUCTS: Product[] = [
     description: 'Distintos grados de dextrosa equivalente para aportar cuerpo, textura y estabilidad.',
     category: 'azucares',
     image: maltodextrinasImg,
+    titleInImage: true,
   },
   {
     n: '06',
@@ -103,6 +112,7 @@ export const PRODUCTS: Product[] = [
     description: 'Mezclas y jarabes desarrollados junto a su equipo técnico según la aplicación y el volumen.',
     category: 'azucares',
     image: formulacionesAMedidaImg,
+    titleInImage: true,
   },
   {
     n: '07',
@@ -112,6 +122,7 @@ export const PRODUCTS: Product[] = [
     description: 'Azúcar cristal en diferentes granulometrías, en formato sólido, para múltiples aplicaciones.',
     category: 'azucares',
     image: azucarEnGranoImg,
+    titleInImage: true,
   },
   {
     n: '08',
@@ -121,6 +132,7 @@ export const PRODUCTS: Product[] = [
     description: 'Variedad de edulcorantes de alta intensidad en formato sólido: sucralosa, aspartamo, stevia y otros.',
     category: 'azucares',
     image: edulcorantesSolidosImg,
+    titleInImage: true,
   },
 
   // Aceites vegetales
@@ -131,6 +143,7 @@ export const PRODUCTS: Product[] = [
     spec: 'Grado alimentario',
     description: 'Aceite de oliva de uso alimentario, disponible en distintas calidades según aplicación.',
     category: 'aceites',
+    image: aceiteOlivaImg,
   },
   {
     n: '02',
@@ -139,6 +152,7 @@ export const PRODUCTS: Product[] = [
     spec: 'Grado alimentario',
     description: 'Aceite de girasol refinado, apto para fritura y procesado industrial.',
     category: 'aceites',
+    image: aceiteGirasolImg,
   },
   {
     n: '03',

@@ -35,7 +35,7 @@ const { product } = Astro.props;
       <span class="product-card__n">{product.n}</span>
       <span class="product-card__spec">{product.spec}</span>
     </div>
-    <h3 class:list={{ 'visually-hidden': Boolean(product.image) }}>{product.title}</h3>
+    <h3 class:list={{ 'visually-hidden': Boolean(product.image && product.titleInImage) }}>{product.title}</h3>
     <p>{product.description}</p>
     <a href={`/contacto?producto=${product.slug}`} class="product-card__link">
       Solicitar ficha técnica
