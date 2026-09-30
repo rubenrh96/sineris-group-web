@@ -31,6 +31,8 @@ export interface Product {
   titleInImage?: boolean;
   /** CSS object-position for the card photo, for images whose subject isn't centered (e.g. a tall bottle) and gets clipped by the default centered 3:2 crop. */
   imagePosition?: string;
+  /** Override the default 3:2 card ratio for photos that lose too much of the subject at that ratio. */
+  imageRatio?: string;
 }
 
 export interface ProductCategory {
@@ -207,7 +209,7 @@ export const PRODUCTS: Product[] = [
     description: 'Aceite de pepita de uva, ligero y de sabor neutro.',
     category: 'aceites',
     image: aceitePepitaUvaImg,
-    imagePosition: 'top',
+    imageRatio: '6 / 5',
   },
 
   // Otros ingredientes

@@ -18,7 +18,12 @@ const { product } = Astro.props;
         alt={`${product.title}: ${product.description}`}
         width={640}
         height={427}
-        style={product.imagePosition ? `object-position: ${product.imagePosition}` : undefined}
+        style={[
+          product.imagePosition && `object-position: ${product.imagePosition}`,
+          product.imageRatio && `aspect-ratio: ${product.imageRatio}`,
+        ]
+          .filter(Boolean)
+          .join('; ') || undefined}
         class="product-card__image product-card__image--photo"
       />
     ) : (
