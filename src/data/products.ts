@@ -9,6 +9,12 @@ import maltodextrinasImg from '../assets/products/maltodextrinas.png';
 import formulacionesAMedidaImg from '../assets/products/formulaciones-a-medida.png';
 import aceiteOlivaImg from '../assets/products/aceite-oliva.png';
 import aceiteGirasolImg from '../assets/products/aceite-girasol.png';
+import aceiteSojaImg from '../assets/products/aceite-soja.png';
+import aceiteColzaImg from '../assets/products/aceite-colza.png';
+import aceiteCocoImg from '../assets/products/aceite-coco.png';
+import aceiteAguacateImg from '../assets/products/aceite-aguacate.png';
+import aceitePepitaUvaImg from '../assets/products/aceite-pepita-uva.png';
+import almidonImg from '../assets/products/almidon.png';
 
 export type CategoryId = 'azucares' | 'aceites' | 'otros';
 
@@ -161,6 +167,7 @@ export const PRODUCTS: Product[] = [
     spec: 'Grado alimentario',
     description: 'Aceite de soja de uso alimentario, con buena estabilidad térmica.',
     category: 'aceites',
+    image: aceiteSojaImg,
   },
   {
     n: '04',
@@ -169,6 +176,7 @@ export const PRODUCTS: Product[] = [
     spec: 'Grado alimentario',
     description: 'Aceite de colza refinado, de perfil nutricional equilibrado.',
     category: 'aceites',
+    image: aceiteColzaImg,
   },
   {
     n: '05',
@@ -177,6 +185,7 @@ export const PRODUCTS: Product[] = [
     spec: 'Grado alimentario',
     description: 'Aceite de coco, sólido a temperatura ambiente, para repostería y snacks.',
     category: 'aceites',
+    image: aceiteCocoImg,
   },
   {
     n: '06',
@@ -185,6 +194,7 @@ export const PRODUCTS: Product[] = [
     spec: 'Grado alimentario',
     description: 'Aceite de aguacate de alta calidad, para aplicaciones gourmet.',
     category: 'aceites',
+    image: aceiteAguacateImg,
   },
   {
     n: '07',
@@ -193,6 +203,7 @@ export const PRODUCTS: Product[] = [
     spec: 'Grado alimentario',
     description: 'Aceite de pepita de uva, ligero y de sabor neutro.',
     category: 'aceites',
+    image: aceitePepitaUvaImg,
   },
 
   // Otros ingredientes
@@ -203,6 +214,7 @@ export const PRODUCTS: Product[] = [
     spec: 'Nativo y modificado',
     description: 'Almidones nativos y modificados para texturizar y estabilizar sus formulaciones.',
     category: 'otros',
+    image: almidonImg,
   },
   {
     n: '02',
