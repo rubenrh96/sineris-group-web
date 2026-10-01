@@ -173,6 +173,7 @@ export const PRODUCTS: Product[] = [
     description: 'Aceite de soja de uso alimentario, con buena estabilidad térmica.',
     category: 'aceites',
     image: aceiteSojaImg,
+    imagePosition: 'top',
   },
   {
     n: '04',
@@ -210,6 +211,7 @@ export const PRODUCTS: Product[] = [
     category: 'aceites',
     image: aceitePepitaUvaImg,
     imageRatio: '6 / 5',
+    imagePosition: 'top',
   },
 
   // Otros ingredientes
@@ -221,6 +223,7 @@ export const PRODUCTS: Product[] = [
     description: 'Almidones nativos y modificados para texturizar y estabilizar sus formulaciones.',
     category: 'otros',
     image: almidonImg,
+    imagePosition: 'top',
   },
   {
     n: '02',
