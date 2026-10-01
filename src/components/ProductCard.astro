@@ -8,6 +8,9 @@ interface Props {
 }
 
 const { product } = Astro.props;
+
+const [ratioW, ratioH] = (product.imageRatio ?? '3 / 2').split('/').map((n) => Number(n.trim()));
+const imageHeight = Math.round((640 * ratioH) / ratioW);
 ---
 
 <article class="product-card" data-reveal>
@@ -17,7 +20,8 @@ const { product } = Astro.props;
         src={product.image}
         alt={`${product.title}: ${product.description}`}
         width={640}
-        height={427}
+        height={imageHeight}
+        position={product.imagePosition ?? 'center'}
         style={[
           product.imagePosition && `object-position: ${product.imagePosition}`,
           product.imageRatio && `aspect-ratio: ${product.imageRatio}`,
