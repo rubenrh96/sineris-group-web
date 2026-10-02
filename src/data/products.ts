@@ -223,7 +223,6 @@ export const PRODUCTS: Product[] = [
     description: 'Almidones nativos y modificados para texturizar y estabilizar sus formulaciones.',
     category: 'otros',
     image: almidonImg,
-    imagePosition: 'top',
   },
   {
     n: '02',
