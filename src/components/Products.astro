@@ -41,7 +41,11 @@ if (featuredSlugs) {
 }
 ---
 
-<section class:list={['section', 'products', surface && 'section--surface']}>
+<section
+  id={category}
+  data-category={category}
+  class:list={['section', 'products', surface && 'section--surface']}
+>
   <div class="wrap">
     <div class="products__head">
       <SectionHeading eyebrow={meta.eyebrow} level={level}>
@@ -65,6 +69,10 @@ if (featuredSlugs) {
 </section>
 
 <style>
+  .products {
+    scroll-margin-top: 8rem;
+  }
+
   .products__head {
     display: flex;
     align-items: flex-end;

@@ -41,6 +41,10 @@ export interface ProductCategory {
   eyebrow: string;
   title: string;
   lede: string;
+  /** One-liner for menus and category tiles. */
+  short: string;
+  /** Slug of the product whose photo represents the category. */
+  coverSlug: string;
 }
 
 export const PRODUCT_CATEGORIES: ProductCategory[] = [
@@ -49,24 +53,32 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     eyebrow: 'Azúcares y jarabes',
     title: 'Azúcares y jarabes de glucosa-fructosa.',
     lede: 'De los jarabes concentrados de sacarosa al azúcar en grano y los edulcorantes sólidos: cada familia se fabrica bajo el mismo control analítico y la misma documentación técnica.',
+    short: 'Jarabes, azúcar líquido y en grano, edulcorantes',
+    coverSlug: 'azucar-liquido',
   },
   {
     id: 'aceites',
     eyebrow: 'Aceites',
     title: 'Aceites vegetales de uso alimentario.',
     lede: 'Una gama de aceites vegetales para fabricantes de alimentos y bebidas, con la misma exigencia de calidad que el resto de nuestro catálogo.',
+    short: 'Oliva, girasol, soja, coco y más',
+    coverSlug: 'aceite-girasol',
   },
   {
     id: 'otros',
     eyebrow: 'Otros ingredientes',
     title: 'Almidones y ácidos.',
     lede: 'Ingredientes complementarios para texturizar, estabilizar y regular la acidez de sus formulaciones.',
+    short: 'Almidón y ácido cítrico',
+    coverSlug: 'almidon',
   },
   {
     id: 'fertilizantes',
     eyebrow: 'Fertilizantes',
     title: 'Fertilizantes líquidos para todo tipo de cultivo.',
     lede: 'Hacemos todo tipo de fertilizantes líquidos, con formulaciones para todas las plantaciones y formulaciones a medida.',
+    short: 'A medida para todo tipo de cultivo',
+    coverSlug: 'fertilizantes-liquidos',
   },
 ];
 

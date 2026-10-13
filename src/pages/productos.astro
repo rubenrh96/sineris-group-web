@@ -2,6 +2,9 @@
 import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Products from '../components/Products.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CategoryTabs from '../components/CategoryTabs.astro';
+import CategoryTiles from '../components/CategoryTiles.astro';
 import Sectors from '../components/Sectors.astro';
 import FAQ from '../components/FAQ.astro';
 import CTA from '../components/CTA.astro';
@@ -43,13 +46,31 @@ const catalogSchema = {
   description="Azúcares y jarabes, aceites vegetales, fertilizantes líquidos, almidones y ácido cítrico: catálogo completo de Sineris Group."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(catalogSchema)} />
-  <div class="products-page__spacer" />
+  <header id="catalogo" class="section section--tight products-page__head">
+    <div class="wrap">
+      <SectionHeading eyebrow="Catálogo" level="h1">
+        Ingredientes para su producción.
+        <p slot="lede">
+          Elija una categoría para ver los productos: azúcares y jarabes, aceites vegetales,
+          almidones y ácidos, y fertilizantes líquidos.
+        </p>
+      </SectionHeading>
+    </div>
+  </header>
+
+  <CategoryTabs />
+
+  <div class="section section--tight" data-category-tiles-wrap>
+    <div class="wrap">
+      <CategoryTiles />
+    </div>
+  </div>
 
   {
     PRODUCT_CATEGORIES.map((cat, index) => (
       <Products
         category={cat.id}
-        level={index === 0 ? 'h1' : 'h2'}
+        level="h2"
         surface={index % 2 === 1}
       />
     ))
@@ -64,8 +85,3 @@ const catalogSchema = {
   />
 </BaseLayout>
 
-<style>
-  .products-page__spacer {
-    padding-top: clamp(1.5rem, 4vw, 3rem);
-  }
-</style>

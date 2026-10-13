@@ -1,0 +1,107 @@
+---
+import { PRODUCT_CATEGORIES } from '../data/products';
+---
+
+<nav class="tabs" aria-label="Filtrar productos por categoría">
+  <div class="wrap tabs__inner">
+    <a href="#catalogo" class="tab is-active" data-filter="all">Todos</a>
+    {
+      PRODUCT_CATEGORIES.map((cat) => (
+        <a href={`#${cat.id}`} class="tab" data-filter={cat.id}>
+          {cat.eyebrow}
+        </a>
+      ))
+    }
+  </div>
+</nav>
+
+<style>
+  .tabs {
+    position: sticky;
+    top: 5.3rem;
+    z-index: 40;
+    background: var(--paper);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tabs__inner {
+    display: flex;
+    gap: 0.5rem;
+    padding-block: 0.75rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tabs__inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    flex-shrink: 0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.45em 1.1em;
+    transition: color 0.25s var(--ease), background-color 0.25s var(--ease),
+      border-color 0.25s var(--ease);
+  }
+
+  .tab:hover {
+    color: var(--ink);
+    border-color: var(--border-strong);
+  }
+
+  .tab.is-active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+</style>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLAnchorElement>('.tab'));
+  const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-category]'));
+  const tiles = document.querySelector<HTMLElement>('[data-category-tiles-wrap]');
+  const ids = sections.map((s) => s.dataset.category);
+
+  function apply(filter: string, scroll: boolean) {
+    sections.forEach((s) => {
+      s.hidden = filter !== 'all' && s.dataset.category !== filter;
+    });
+    if (tiles) tiles.hidden = filter !== 'all';
+    tabs.forEach((t) => t.classList.toggle('is-active', t.dataset.filter === filter));
+    if (scroll) {
+      const target = document.getElementById(filter === 'all' ? 'catalogo' : filter);
+      target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function fromHash() {
+    const id = location.hash.slice(1);
+    return ids.includes(id as never) ? id : 'all';
+  }
+
+  tabs.forEach((tab) =>
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      const filter = tab.dataset.filter ?? 'all';
+      history.replaceState(null, '', filter === 'all' ? location.pathname : `#${filter}`);
+      apply(filter, true);
+    })
+  );
+
+  document.querySelectorAll<HTMLAnchorElement>('[data-category-tiles] a').forEach((a) =>
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const filter = a.dataset.filter ?? 'all';
+      history.replaceState(null, '', `#${filter}`);
+      apply(filter, true);
+    })
+  );
+
+  window.addEventListener('hashchange', () => apply(fromHash(), true));
+  apply(fromHash(), location.hash.length > 1);
+</script>
