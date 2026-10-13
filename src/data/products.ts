@@ -16,8 +16,9 @@ import aceiteAguacateImg from '../assets/products/aceite-aguacate.png';
 import aceitePepitaUvaImg from '../assets/products/aceite-pepita-uva.png';
 import almidonImg from '../assets/products/almidon.png';
 import acidoCitricoImg from '../assets/products/acido-citrico.png';
+import fertilizantesLiquidosImg from '../assets/products/fertilizantes-liquidos.png';
 
-export type CategoryId = 'azucares' | 'aceites' | 'otros';
+export type CategoryId = 'azucares' | 'aceites' | 'otros' | 'fertilizantes';
 
 export interface Product {
   n: string;
@@ -60,6 +61,12 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     eyebrow: 'Otros ingredientes',
     title: 'Almidones y ácidos.',
     lede: 'Ingredientes complementarios para texturizar, estabilizar y regular la acidez de sus formulaciones.',
+  },
+  {
+    id: 'fertilizantes',
+    eyebrow: 'Fertilizantes',
+    title: 'Fertilizantes líquidos para todo tipo de cultivo.',
+    lede: 'Hacemos todo tipo de fertilizantes líquidos, con formulaciones para todas las plantaciones y formulaciones a medida.',
   },
 ];
 
@@ -232,5 +239,16 @@ export const PRODUCTS: Product[] = [
     description: 'Regulador de acidez y conservante natural de uso alimentario, en formato sólido.',
     category: 'otros',
     image: acidoCitricoImg,
+  },
+
+  // Fertilizantes líquidos
+  {
+    n: '01',
+    slug: 'fertilizantes-liquidos',
+    title: 'Fertilizantes líquidos',
+    spec: 'Formulación a medida',
+    description: 'Todo tipo de fertilizantes líquidos, con formulaciones para todas las plantaciones y formulaciones a medida según su cultivo.',
+    category: 'fertilizantes',
+    image: fertilizantesLiquidosImg,
   },
 ];
